@@ -80,8 +80,8 @@
   debug: msg="{{ galera_cluster_bind_address }}"
 
 - name: Debug output 2
-  debug: msg="{{ galera_cluster_bind_address }}"
-  loop: "{{ hostvars[node]['galera_cluster_bind_address'] }}"
+  debug: msg="{{hostvars[item]['galera_cluster_bind_address'] }}"
+  loop: "{{ galera_cluster_nodes }}"
 
 - name: setup_cluster | configuring settings for mariadb and galera
   template:
