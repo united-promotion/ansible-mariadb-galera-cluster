@@ -4,7 +4,7 @@
 # MariaDB setting
 
 # Define mariadb version
-mariadb_version: "10.6"
+mariadb_version: "10.16"
 
 # Defines if we should enable the MariaDB repo or use version within OS repos.
 galera_enable_mariadb_repo: true
@@ -92,12 +92,12 @@ mariadb_charset_client: "utf8"
 # common mariadb setting doesn't require this option
 galera_reconfigure_galera: false
 
-# Define interface in which to bind
-# ex. eth0|eth1|enp0s3|enp0s8
-galera_cluster_bind_interface: "eth0"
+# Defines if the galera cluster should be bind to the
+# private ip address or not. Default - false
+galera_cluster_bind_address_private: false
 
 # Define bind address for galera cluster
-galera_cluster_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + galera_cluster_bind_interface]['ipv4']['address'] }}"
+galera_cluster_bind_address: "{{ ansible_all_ipv4_addresses | ipaddr('private' if galera_cluster_bind_address_private == true else 'public') | first }}"
 
 # Defines wsrep node address
 galera_wsrep_node_address: "{{ galera_cluster_bind_address }}:{{ galera_wsrep_node_address_port }}"
