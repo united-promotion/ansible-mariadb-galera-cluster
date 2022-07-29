@@ -49,6 +49,11 @@ wsrep_node_name={{ ansible_hostname }}
 wsrep_provider={{ galera_wsrep_provider }}
 wsrep_cluster_name="{{ galera_cluster_name }}"
 {% set _galera_cluster_node_addresses = [] %}
+
+{% for node in galera_cluster_bind_address %}
+{%   set galera_cluster_bind_address = galera_cluster_bind_address  | mandatory  %}
+{% endfor %}
+
 {% for node in galera_cluster_nodes %}
 {%   set _ = _galera_cluster_node_addresses.append( hostvars[node]['galera_cluster_bind_address']) | mandatory  %}
 {% endfor %}
