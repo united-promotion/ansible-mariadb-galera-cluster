@@ -97,7 +97,7 @@ galera_reconfigure_galera: false
 galera_cluster_bind_address_private: false
 
 # Define bind address for galera cluster
-galera_cluster_bind_address: "{{ ansible_all_ipv4_addresses | ipaddr('public' if (galera_cluster_bind_address_private) else 'private') | first }}"
+galera_cluster_bind_address: "{{ ansible_all_ipv4_addresses | ipaddr(galera_cluster_bind_address_private | ternary('private', 'public')) | first }}"
 
 # Defines wsrep node address
 galera_wsrep_node_address: "{{ galera_cluster_bind_address }}:{{ galera_wsrep_node_address_port }}"
