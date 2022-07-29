@@ -76,13 +76,6 @@
         var: galera_extra_wsrep_provider_options
         verbosity: 3
 
-- name: Debug output 1
-  debug: msg="{{ galera_cluster_bind_address }}"
-
-- name: Debug output 2
-  debug: msg="{{ hostvars[item]['galera_cluster_bind_address'] }}"
-  loop: "{{ galera_cluster_nodes }}"
-
 - name: setup_cluster | configuring settings for mariadb and galera
   template:
     src: "{{ item }}.j2"
