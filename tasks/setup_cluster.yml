@@ -166,14 +166,14 @@
 
 - name: setup_cluster | configuring temp galera config for first node
   template:
-    src: "{{ item }}.temp.j2"
+    src: "{{ item }}.j2"
     dest: "/{{ item }}"
     mode: "0644"
   become: true
-  loop: "{{ mariadb_temp_confs }}"
+  loop: "{{ mariadb_confs }}"
   when: >
     not galera_cluster_configured.stat.exists and
-    inventory_hostname == galera_mysql_first_node
+    inventory_hostname == galera_mysql_first_nodeck
 
 - name: setup_cluster | bootstrapping galera cluster
   command: "/usr/bin/galera_new_cluster"
