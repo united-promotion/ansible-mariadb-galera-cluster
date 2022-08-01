@@ -1,16 +1,5 @@
 ---
 
-- name: ensure NIC specified in 'galera_cluster_bind_interface' exists
-  assert:
-    that: galera_cluster_bind_interface in ansible_interfaces
-    fail_msg: >-
-      The NIC name "{{ galera_cluster_bind_interface }}" specified in
-      "galera_cluster_bind_interface" does not exist on the target host.
-      Available interfaces are: "{{ ansible_interfaces | join(',') }}".
-  tags:
-    - install
-    - config
-
 - name: When mariadb_sst_username is unix_socket, the mariadb_sst_password should not be set
   assert:
     that:

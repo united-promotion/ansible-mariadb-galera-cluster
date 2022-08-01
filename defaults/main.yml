@@ -92,12 +92,12 @@ mariadb_charset_client: "utf8"
 # common mariadb setting doesn't require this option
 galera_reconfigure_galera: false
 
-# Define interface in which to bind
-# ex. eth0|eth1|enp0s3|enp0s8
-galera_cluster_bind_interface: "eth0"
+# Defines which type of address should galera use
+# private or public.
+galera_cluster_bind_address_private: false
 
 # Define bind address for galera cluster
-galera_cluster_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + galera_cluster_bind_interface]['ipv4']['address'] }}"
+galera_cluster_bind_address: "{{ ansible_all_ipv4_addresses | ipaddr(galera_cluster_bind_address_private | bool | ternary('private', 'public')) | first }}"
 
 # Defines wsrep node address
 galera_wsrep_node_address: "{{ galera_cluster_bind_address }}:{{ galera_wsrep_node_address_port }}"
