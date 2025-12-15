@@ -37,6 +37,13 @@ slow_query_log
 long_query_time = {{ mariadb_long_query_time }}
 {% endif %}
 
+innodb_flush_method = {{ mariadb_mysql_settings['innodb_flush_method'] }}
+innodb_flush_neighbors = {{ mariadb_mysql_settings['innodb_flush_neighbors'] }}
+innodb_io_capacity = {{ mariadb_mysql_settings['innodb_io_capacity'] }}
+innodb_io_capacity_max = {{ mariadb_mysql_settings['innodb_io_capacity_max'] }}
+
+
+
 {% if mariadb_tls_files and mariadb_tls_files|length == 3 %}
 ssl_ca = {{ mariadb_certificates_dir }}/{{ mariadb_tls_files.ca_cert.name }}
 ssl_cert = {{ mariadb_certificates_dir }}/{{ mariadb_tls_files.server_cert.name }}
@@ -52,7 +59,7 @@ wsrep_cluster_name="{{ galera_cluster_name }}"
 {% for node in galera_cluster_nodes %}
 {%   set _ = _galera_cluster_node_addresses.append( hostvars[node]['galera_cluster_bind_address'] | mandatory ) %}
 {% endfor %}
-wsrep_cluster_address="{{ 'gcomm://' ~ _galera_cluster_node_addresses | map('ipwrap') | list | join(',') }}"
+wsrep_cluster_address="{{ 'gcomm://' ~ _galera_cluster_node_addresses | map('ansible.utils.ipwrap') | list | join(',') }}"
 # To start failed cluster comment out above and uncomment below...Once cluster is started revert changes and restart mysql on main node where change was made
 #wsrep_cluster_address="gcomm://"
 
