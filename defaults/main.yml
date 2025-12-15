@@ -10,9 +10,9 @@ mariadb_version: "10.6"
 galera_enable_mariadb_repo: true
 
 # Defines repository settings for apt
-mariadb_debian_repo: "deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/{{ mariadb_version }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} main"
-mariadb_debian_repo_keyserver: "keyserver.ubuntu.com"
-mariadb_debian_repo_pin: "nyc2.mirrors.digitalocean.com"
+mariadb_debian_repo: "deb [arch=amd64,i386,ppc64el] https://mirror.23m.com/mariadb/repo/{{ mariadb_version }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} main"
+mariadb_debian_repo_keyserver: "mariadb.org"
+mariadb_debian_repo_pin: "https://mirror.23m.com"
 
 # Defines repository settings for rpm
 mariadb_redhat_repo: "https://yum.mariadb.org/{{ mariadb_version }}/{{ ansible_distribution|lower }}{{ ansible_distribution_major_version }}-amd64"

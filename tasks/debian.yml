@@ -10,7 +10,6 @@
     name: "{{ mariadb_pre_req_packages }}"
     state: "present"
   become: true
-  loop:
 
 - name: debian | adding MariaDB Repo Keys
   apt_key:
