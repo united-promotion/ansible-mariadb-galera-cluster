@@ -15,7 +15,7 @@ key_buffer_size = {{ mariadb_mysql_settings['key_buffer_size'] }}
 lc-messages-dir = /usr/share/mysql
 log_error = /var/log/mysql/error.log
 max_allowed_packet = {{ mariadb_mysql_settings['max_allowed_packet'] }}
-{% comment %} max_binlog_size = {{ mariadb_mysql_settings['max_binlog_size'] }} {% endcomment %}
+
 myisam-recover = BACKUP
 port = {{ mariadb_mysql_port }}
 query_cache_limit = {{ mariadb_mysql_settings['query_cache_limit'] }}
